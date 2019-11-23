@@ -34,6 +34,13 @@ export default function App() {
     console.log(goals)
   }
 
+  const removeGoalHandler = (id) => {
+    console.log(id);
+    setGoals(currentGoals => {
+      return currentGoals.filter(g => g.id !== id)
+    })
+  }
+
   return (
     <View>
       <View style={{padding: 30, display: 'flex', flexDirection: 'row'}}>
@@ -61,12 +68,14 @@ export default function App() {
           padding: 20, 
           backgroundColor: '#fafafa', 
           color: 'white',
-          borderColor: 'black',
+          borderColor: '#EFEFEF',
+          borderRadius: 3,
           borderWidth: 1,
           marginBottom: 8
         }}>
-          <Text style={{ fontSize: 30, marginBottom: 8}}>Title</Text>
-          <Text>{ item.goal }</Text>
+          <Text style={{ fontSize: 30, marginBottom: 8, color: '#2F2F2F'}}>Title</Text>
+          <Text style={{ color: '#696969', marginBottom: 8 }}>{ item.goal }</Text>
+          <Button style={{ backgroundColor: '#C33434'}} title="Remove" onPress={removeGoalHandler.bind(this, item.id)}></Button>
         </View>
       )}>
       </FlatList>
