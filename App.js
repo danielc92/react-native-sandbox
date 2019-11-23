@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { uuid } from 'uuidv4';
 import {
   StyleSheet, 
   FlatList,
@@ -25,7 +26,11 @@ export default function App() {
   }
 
   const addGoalHandler = () => {
-    setGoals([...goals, goal]);
+    const goalItem = {
+      id: uuid(),
+      goal
+    }
+    setGoals([...goals, goalItem]);
     console.log(goals)
   }
 
@@ -48,6 +53,7 @@ export default function App() {
         </View>
       </View>
       <FlatList
+      keyExtractor={(item, index) => item.id}
       data={goals}
       renderItem={({item, index}) => (
         <View 
@@ -58,10 +64,9 @@ export default function App() {
           borderColor: 'black',
           borderWidth: 1,
           marginBottom: 8
-        }}
-        key={ index.toString() }>
+        }}>
           <Text style={{ fontSize: 30, marginBottom: 8}}>Title</Text>
-          <Text>{ item }</Text>
+          <Text>{ item.goal }</Text>
         </View>
       )}>
       </FlatList>
